@@ -50,4 +50,6 @@ public abstract class Boat {
       System.out.println("The boat must be longer than one meter.");
     }
   }
+
+  public abstract void getInfo();
 }

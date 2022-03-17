@@ -1,12 +1,15 @@
 package assignment4.boatclub;
 
+import java.util.ArrayList;
+
 /**
  * Represents a Member class.
  */
-public abstract class Member {
+public class Member {
   private String name;
   private String memberId;
   private String email;
+  private ArrayList<String> memberBoat = new ArrayList<String>();
 
   public Member() {
 

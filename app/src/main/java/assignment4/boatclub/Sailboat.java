@@ -30,5 +30,11 @@ public class Sailboat extends Boat {
       System.out.println("The depth of the boat must be deeper than zero meters.");
     }
   }
+
+  @Override
+  public void getInfo() {
+    // TODO Auto-generated method stub
+    
+  }
   
 }
