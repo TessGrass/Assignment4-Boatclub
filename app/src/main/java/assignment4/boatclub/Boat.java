@@ -27,10 +27,10 @@ public abstract class Boat {
    * @param theName - the name.
    */
   public void setName(String theName) {
-    if (theName != null && theName.length() > 1) {
+    if (theName != null && theName.length() > 0) {
       this.name = theName;
     } else {
-      System.out.println("The boat name must be longer than one character.");
+      System.out.println("The name of the boat must contain characters");
     }
   }
 
@@ -47,7 +47,7 @@ public abstract class Boat {
     if (theLength > 1) {
       this.length = theLength;
     } else {
-      System.out.println("The boat name must be longer than one meter.");
+      System.out.println("The boat must be longer than one meter.");
     }
   }
 }
