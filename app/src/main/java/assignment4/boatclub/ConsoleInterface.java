@@ -57,27 +57,58 @@ public class ConsoleInterface {
    * Add a member to the Boat Club.
    */
   public void addMember() {
-    System.out.print("Add a name: ");
-    String name = scan.nextLine();
-    System.out.print("Add an email (Optional): ");
-    String email = scan.nextLine();
-    if (email.length() < 1) {
-      email = "N/A";
+    try {
+      System.out.print("Add a name: ");
+      String name = scan.nextLine();
+      System.out.print("Add an email (Optional): ");
+      String email = scan.nextLine();
+      if (email.length() < 1) {
+        email = "N/A";
+      }
+      Boolean b = members.addMember(name, email);
+      while (b) {
+        System.out.println("Email already taken, please try again");
+        System.out.print("Add an email (Optional): ");
+        email = scan.nextLine();
+        b = members.addMember(name, email);
+      }
+      System.out.print("The member was succesfully created! Press Enter to return to menu: ");
+      System.in.read();
+    } catch (Exception e) {
+      System.out.println("Something went wrong.");
     }
-    members.addMember(name, email);
-  }
+}
 
   /**
    * List of all members.
    */
   public void listMembers() {
-    members.listAllMembers();
-    System.out.println("Add the id for a specific member:() "); {      
-      String id = scan.nextLine();
-      String member = members.listSpecificMember(id);
-      System.out.println(member);
-      
-    }
-
+    try {
+      members.listAllMembers();
+      /* if (members.listAllMembers() == null) {
+        System.out.print("No members to display. ");
+      } else { */
+      System.out.print("Do you want to see/delete a specific member y/n: "); {
+        String input;
+        input = scan.nextLine();
+        if (input.equalsIgnoreCase("y")) {
+          System.out.print("Enter a members id: ");
+          String id = scan.nextLine();
+          String member = members.listSpecificMember(id);
+          System.out.println(member);
+          System.out.print("Do you want to delete member y/n: ");
+          input = scan.nextLine();
+          if (input.equalsIgnoreCase("y")) {
+            members.deleteMember(id);
+            System.out.println("Member is deleted\n");
+          }
+        }
+        // }
+      }
+      System.out.print("Press Enter to return to Menu");
+      System.in.read();
+    } catch (Exception e) {
+      System.out.println("Something went wrong.");
+    }    
   }
 }

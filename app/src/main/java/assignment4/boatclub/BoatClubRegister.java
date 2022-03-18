@@ -21,22 +21,36 @@ public class BoatClubRegister {
    * @param theName - The name.
    * @param theEmail - The email.
    */
-  public void addMember(String theName, String theEmail) {
-    System.out.println("----addMember-----");   
+  public Boolean addMember(String theName, String theEmail) {
+    System.out.println("----addMember-----");
+    Boolean email = validator.runMemberEmailValidator(listOfMembers, theEmail);
+    if (email == true) {
+      return true;
+    }
     String memberId = alphaNum.alphaNumGen();
-    Boolean b = validator.runMemberIdValidator(listOfMembers, memberId);
-    if (b == true) {
+    Boolean id = validator.runMemberIdValidator(listOfMembers, memberId);
+    
+    if (id == true) {
       memberId = alphaNum.alphaNumGen();
     }  
     Member member = new Member(theName, theEmail, memberId);
     listOfMembers.add(member);
-    for (Member a : listOfMembers) {
+    /* for (Member a : listOfMembers) {
       System.out.println("NAME: " + a.getName() + " EMAIL: " + a.getEmail() + " ID: " + a.getMemberId());
-    }
+    } */
+    return false;
   }
 
+  /**
+   * Lists all members.
+   *
+   * @return a list with all members.
+   */
   public String listAllMembers() {
     String member = null;
+    if (listOfMembers.size() < 1) {
+      return null;
+    }
     for (Member a : listOfMembers) {
       System.out.println("NAME: " + a.getName() + " EMAIL: " + a.getEmail() + " ID: " + a.getMemberId());
     }
@@ -45,17 +59,17 @@ public class BoatClubRegister {
 
   /**
    * List a specific member.
-   * @param id
-   * @return
+   *
+   * @param id - The id for a member.
+   * @return Returns member if found, else return No Member Found.
    */
   public String listSpecificMember(String id) {
     System.out.println("----listSpecificMember-----"); 
     Boolean b = validator.runMemberIdValidator(listOfMembers, id);
-    if (b == true) {
-      System.out.println("b = true"); 
+    if (b == true) { 
       for (Member a : listOfMembers) {
         if (id.equals(a.getMemberId())) {
-          return "NAME: " + a.getName() + " EMAIL: " + a.getEmail() + " ID: " + a.getMemberId();
+          return "NAME: " + a.getName() + " EMAIL: " + a.getEmail() + " ID: " + a.getMemberId() + "\n";
         }
       }
     }
@@ -65,10 +79,19 @@ public class BoatClubRegister {
   /**
    * Delete a member.
    */
-  public void deleteMember() {
+  public Boolean deleteMember(String id) {
     System.out.println("----deleteMember-----");
+    for (Member a : listOfMembers) {
+      if (id.equals(a.getMemberId())) {
+        listOfMembers.remove(a);
+        return true;
+      }
+    }
+    return false;
+  }
 
-
+  public void addBoat() {
+    
   }
 
 
