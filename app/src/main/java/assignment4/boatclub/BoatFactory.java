@@ -8,8 +8,8 @@ public class BoatFactory {
   /**
    * Represents a Boat Factory.
    *
-   * @param newBoatType 
-   * @return
+   * @param newBoatType - The boat type that want's to be created.
+   * @return Boat type.
    */
   public Boat makeBoat(String newBoatType) {
   
@@ -19,11 +19,11 @@ public class BoatFactory {
 
     if (newBoatType.equalsIgnoreCase("Motorboat")) {
       return new Motorboat();
-    } else if (newBoatType.equals("Motorsailer")) {
+    } else if (newBoatType.equalsIgnoreCase("Motorsailer")) {
       return new Motorsailer();
-    } else if (newBoatType.equals("Sailboat")) {
+    } else if (newBoatType.equalsIgnoreCase("Sailboat")) {
       return new Canoe();
-    } else if (newBoatType.equals("Canoe")) {
+    } else if (newBoatType.equalsIgnoreCase("Canoe")) {
       return new Canoe();
     }
     return null;

@@ -4,7 +4,7 @@ package assignment4.boatclub;
  * Represents the start of the main application.
  */
 public class MainApp {
-  private ConsoleUI menu = new ConsoleUI();
+  private ConsoleInterface menu = new ConsoleInterface();
 
   /**
  * The main method.
@@ -12,7 +12,7 @@ public class MainApp {
  * @param args
  */
   public static void main(String[] args) {
-    ConsoleUI menuBoatClub = new ConsoleUI();
+    ConsoleInterface menuBoatClub = new ConsoleInterface();
    
     menuBoatClub.menu();
   

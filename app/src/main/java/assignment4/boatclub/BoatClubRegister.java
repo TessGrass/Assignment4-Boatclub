@@ -1,59 +1,94 @@
 package assignment4.boatclub;
 
-// import java.util.HashMap;
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Represents a register in the Boat Club.
  */
 public class BoatClubRegister {
-  ArrayList<Member> listOfMembers = new ArrayList<>();  
+  ArrayList<Member> listOfMembers = new ArrayList<>();
+  AlphaNumGenerator alphaNum = new AlphaNumGenerator();
+  MemberIdValidator validator = new MemberIdValidator();
+
 
   public BoatClubRegister() {
 
   }
 
+  /**
+   * Add a member to the Boat Club.
+   *
+   * @param theName - The name.
+   * @param theEmail - The email.
+   */
   public void addMember(String theName, String theEmail) {
-    System.out.print("----addMember Register-----");
-    Member member = new Member(theName, theEmail, "fdgdfg");
-    
-
+    System.out.println("----addMember-----");   
+    String memberId = alphaNum.alphaNumGen();
+    Boolean b = validator.runMemberIdValidator(listOfMembers, memberId);
+    if (b == true) {
+      memberId = alphaNum.alphaNumGen();
+    }  
+    Member member = new Member(theName, theEmail, memberId);
     listOfMembers.add(member);
-    for (Member m : listOfMembers) {
-      System.out.println(m);
-    }
-
     for (Member a : listOfMembers) {
+      System.out.println("NAME: " + a.getName() + " EMAIL: " + a.getEmail() + " ID: " + a.getMemberId());
+    }
+  }
+
+  public String listAllMembers() {
+    String member = null;
+    for (Member a : listOfMembers) {
+      System.out.println("NAME: " + a.getName() + " EMAIL: " + a.getEmail() + " ID: " + a.getMemberId());
+    }
+    return member;
+  }
+
+  /**
+   * List a specific member.
+   * @param id
+   * @return
+   */
+  public String listSpecificMember(String id) {
+    System.out.println("----listSpecificMember-----"); 
+    Boolean b = validator.runMemberIdValidator(listOfMembers, id);
+    if (b == true) {
+      System.out.println("b = true"); 
+      for (Member a : listOfMembers) {
+        if (id.equals(a.getMemberId())) {
+          return "NAME: " + a.getName() + " EMAIL: " + a.getEmail() + " ID: " + a.getMemberId();
+        }
+      }
+    }
+    return "No Member Found";
+  }
+
+  /**
+   * Delete a member.
+   */
+  public void deleteMember() {
+    System.out.println("----deleteMember-----");
+
+
+  }
+
+
+
+  /* public boolean runValidator(String name) {
+    System.out.println("----runValidator-----");
+    Boolean b = false;
+    for (Member a : listOfMembers) {
+      System.out.println("for each");
+      System.out.println(name);
       System.out.println(a.getName());
+      if (name.equals(a.getName())) {
+        System.out.println("if true");
+        b = true;
+      } else {
+        System.out.println("continue");
+        continue;
+      }
     }
-
-    int idLength = 4;
-    String number = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    StringBuilder sb = new StringBuilder(idLength);
-    for (int i = 0; i < idLength; i++) {
-      sb.append(number.charAt(rnd.nextInt(number.length())));
-      System.out.println(sb.toString());
-    }
-
-  /* private HashMap<String, String> memberRegister;
-  
-  public BoatClubRegister() {
-    this.memberRegister = new HashMap<String, String>();
-  }
-
-  public void addMember(String addMember, String addMemberId) {
-    this.memberRegister.put(addMemberId, addMember);
-  }
-
-  public boolean listMember() {
-    System.out.println(memberRegister);
-   return true; */
-    /* for(Map.Entry<String, String> entry: memberRegister.entrySet()) {
-    System.out.print(entry.getKey());
-    System.out.print(entry.getValue());
-    } 
-    }*/
-  }
+    return b;
+  } */
 }
 

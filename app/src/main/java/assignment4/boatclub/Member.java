@@ -9,7 +9,7 @@ public class Member {
   private String name;
   private String memberId;
   private String email;
-  private ArrayList<String> memberBoat = new ArrayList<String>();
+  private ArrayList<Boat> memberBoat = new ArrayList<>();
 
   public Member() {
 
@@ -22,7 +22,7 @@ public class Member {
    * @param memberId - The member's id.
    * @param email - The members email (optional).
    */
-  public Member(String name, String memberId, String email) {
+  public Member(String name, String email, String memberId) {
     this.name = name;
     this.memberId = memberId;
     this.email = email;
@@ -59,6 +59,17 @@ public class Member {
 
   public void setEmail(String email) {
     this.email = email;
-  } 
+  }
+
+  public Boat getBoat() {
+    for (Boat a : memberBoat) {
+      System.out.println("NAME: " + a.getName());
+    }
+    return null;
+  }
+
+  public void setBoat(Boat boat) {
+    memberBoat.add(boat);
+  }
   
 }

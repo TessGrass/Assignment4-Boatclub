@@ -5,15 +5,16 @@ import java.util.Scanner;
 /**
  * Represents the main application of a boat club.
  */
-public class ConsoleUI {
+public class ConsoleInterface {
   BoatClubRegister members = new BoatClubRegister();
-  Scanner scan = new Scanner(System.in);
+  private Scanner scan = new Scanner(System.in);
 
   /**
    * The menu of the Boat Club.
    */
   public void menu() {
     while (true) {
+      System.out.println();
       System.out.println("----------------------------------------\n"
                       + "| WELCOME TO THIS EXCLUSIVE BOAT CLUB! |\n"
                       + "----------------------------------------\n"
@@ -35,7 +36,7 @@ public class ConsoleUI {
           addMember();
           break;
         case 2:
-          addMember();
+          listMembers();
           break;
         case 3:
           break;
@@ -52,16 +53,31 @@ public class ConsoleUI {
     }
   }
 
+  /**
+   * Add a member to the Boat Club.
+   */
   public void addMember() {
-    String name;
-    String email;
     System.out.print("Add a name: ");
-    name = scan.nextLine();
-    System.out.print("Add a email(Leave blank if not provided): ");
-    email = scan.nextLine();
-    if (email == null) {
-      email = "-";
+    String name = scan.nextLine();
+    System.out.print("Add an email (Optional): ");
+    String email = scan.nextLine();
+    if (email.length() < 1) {
+      email = "N/A";
     }
     members.addMember(name, email);
+  }
+
+  /**
+   * List of all members.
+   */
+  public void listMembers() {
+    members.listAllMembers();
+    System.out.println("Add the id for a specific member:() "); {      
+      String id = scan.nextLine();
+      String member = members.listSpecificMember(id);
+      System.out.println(member);
+      
+    }
+
   }
 }
