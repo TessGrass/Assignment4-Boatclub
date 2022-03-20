@@ -22,11 +22,5 @@ public class Motorboat extends Boat {
   public void setHorsepower(int theHorsepower) {
     this.horsepower = theHorsepower;
   }
-
-  @Override
-  public void getInfo() {
-    // TODO Auto-generated method stub
-    
-  }
   
 }

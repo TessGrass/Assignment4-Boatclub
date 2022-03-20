@@ -27,19 +27,26 @@ public class MemberIdValidator {
     return b;
   }
 
+  /**
+   * Checks for email duplicate in the system.
+   *
+   * @param listOfMembers - All the current members.
+   * @param theEmail - the email that is going to get validated.
+   * @return a boolean.
+   */
   public Boolean runMemberEmailValidator(ArrayList<Member> listOfMembers, String theEmail) {
     System.out.println("----runEmailValidator-----");
-    Boolean b = false;
+    Boolean bool = false;
     if (theEmail.equals("N/A")) {
-      return b;
+      return bool;
     }
     for (Member a : listOfMembers) {
       if (theEmail.equals(a.getEmail())) {
-        b = true;
+        bool = true;
       } else {
         continue;
       }
     }
-    return b;
+    return bool;
   } 
 }

@@ -47,9 +47,7 @@ public abstract class Boat {
     if (theLength > 1) {
       this.length = theLength;
     } else {
-      System.out.println("The boat must be longer than one meter.");
+      System.out.println("The boat must be longer than 1 meter.");
     }
   }
-
-  public abstract void getInfo();
 }

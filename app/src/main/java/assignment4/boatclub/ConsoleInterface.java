@@ -6,25 +6,25 @@ import java.util.Scanner;
  * Represents the main application of a boat club.
  */
 public class ConsoleInterface {
-  BoatClubRegister members = new BoatClubRegister();
+  private BoatClubRegister members = new BoatClubRegister();
+  private BoatFactory boatFactory = new BoatFactory();
   private Scanner scan = new Scanner(System.in);
 
   /**
-   * The menu of the Boat Club.
+   * The consoleUi of the Boat Club.
    */
-  public void menu() {
+  public void consoleUi() {
     while (true) {
       System.out.println();
       System.out.println("----------------------------------------\n"
                       + "| WELCOME TO THIS EXCLUSIVE BOAT CLUB! |\n"
                       + "----------------------------------------\n"
-                      + "Please make your choice from the menu below:\n"
+                      + "Please make your choice from the consoleUi below:\n"
                       + "1. Add a new member to the boat club\n"
-                      + "2. List all members / Specific member\n"
-                      + "3. Delete member\n"
-                      + "4. Add a boat to member\n"
-                      + "5. Read info about a specific boat\n"
-                      + "6. Exit the application");
+                      + "2. List all members / Edit a specific member\n"
+                      + "3. Add a boat to member\n"
+                      + "4. Read info about a specific boat\n"
+                      + "5. Exit the application");
 
   
       System.out.print("\nChoose a number: ");
@@ -47,7 +47,7 @@ public class ConsoleInterface {
         case 6:
           break;
         default:
-          System.out.println("\n ! Please enter a valid number from the menu ! \n");
+          System.out.println("\n ! Please enter a valid number from the consoleUi ! \n");
           break;
       }
     }
@@ -65,19 +65,19 @@ public class ConsoleInterface {
       if (email.length() < 1) {
         email = "N/A";
       }
-      Boolean b = members.addMember(name, email);
-      while (b) {
+      Boolean bool = members.addMember(name, email);
+      while (bool) {
         System.out.println("Email already taken, please try again");
-        System.out.print("Add an email (Optional): ");
+        System.out.print("Add an email (Enter to skip): ");
         email = scan.nextLine();
-        b = members.addMember(name, email);
+        bool = members.addMember(name, email);
       }
-      System.out.print("The member was succesfully created! Press Enter to return to menu: ");
+      System.out.print("The member was successfully created!\nPress Enter to return to consoleUi:");
       System.in.read();
     } catch (Exception e) {
-      System.out.println("Something went wrong.");
+      System.out.println("Something went wrong");  // CLOSE THE PROGRAM GRACEFULLY
     }
-}
+  }
 
   /**
    * List of all members.
@@ -85,30 +85,64 @@ public class ConsoleInterface {
   public void listMembers() {
     try {
       members.listAllMembers();
-      /* if (members.listAllMembers() == null) {
-        System.out.print("No members to display. ");
-      } else { */
-      System.out.print("Do you want to see/delete a specific member y/n: "); {
-        String input;
-        input = scan.nextLine();
+      System.out.print("Do you want to get info / add boat to a specific member? Y/N: "); {
+        String input = scan.nextLine();
         if (input.equalsIgnoreCase("y")) {
           System.out.print("Enter a members id: ");
           String id = scan.nextLine();
-          String member = members.listSpecificMember(id);
-          System.out.println(member);
-          System.out.print("Do you want to delete member y/n: ");
-          input = scan.nextLine();
-          if (input.equalsIgnoreCase("y")) {
+          // members.listSpecificMember(id);
+          System.out.print("Do you want to add a boat? Y/N: ");
+          String addBoat = scan.nextLine();
+          if (addBoat.equalsIgnoreCase("y")) {
+            addBoatToMember(id);
+          }
+          System.out.print("Do you want to delete the member Y/N: ");
+          String deleteMember = scan.nextLine();
+          if (deleteMember.equalsIgnoreCase("y")) {
             members.deleteMember(id);
-            System.out.println("Member is deleted\n");
+            System.out.println("The member is deleted\n");
           }
         }
-        // }
       }
       System.out.print("Press Enter to return to Menu");
       System.in.read();
     } catch (Exception e) {
       System.out.println("Something went wrong.");
     }    
+  }
+
+  /**
+   * Adding a boat to a member.
+   *
+   * @param memberId - The members id.
+   */
+  public void addBoatToMember(String memberId) {
+    try {
+      String id = memberId;
+      System.out.print(id);  
+      System.out.print(members.listAllMembers());
+      System.out.println("We accept the following type of boats: \n" + "A) Motorboat \n"
+          + "B) Sailboat \n" + "C) Motorsailer \n" + "D) Canoe");
+      System.out.print("Enter A, B, C, or D to add: ");
+      String boatType = scan.nextLine();
+      System.out.print("Enter the name of boat you want to add: ");
+      String boatName = scan.nextLine();
+      System.out.print("Enter the length of the boat (Enter 0 to skip): ");
+      int boatLength = scan.nextInt();
+      System.out.print("Enter number of horsepower (Enter 0 to skip): ");
+      int boatPower = scan.nextInt();
+      System.out.print("Enter the boats depth (Enter 0 to skip): ");
+      int boatDepth = scan.nextInt();
+      System.out.print(boatLength + boatDepth + boatPower);
+      Boat memberBoat = boatFactory.makeBoat(boatType, boatName, boatLength, boatPower, boatDepth);
+      members.addBoat(memberBoat, id);
+      System.out.println(memberBoat);
+      System.out.println("Press Enter to return to Menu");
+      System.in.read(); 
+
+
+    } catch (Exception e) {
+      System.out.println("Something went wrong");  // CLOSE THE PROGRAM GRACEFULLY
+    }
   }
 }

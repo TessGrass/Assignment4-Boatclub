@@ -47,14 +47,13 @@ public class BoatClubRegister {
    * @return a list with all members.
    */
   public String listAllMembers() {
-    String member = null;
     if (listOfMembers.size() < 1) {
-      return null;
+      return "No members was found";
     }
     for (Member a : listOfMembers) {
-      System.out.println("NAME: " + a.getName() + " EMAIL: " + a.getEmail() + " ID: " + a.getMemberId());
+      System.out.println("NAME: " + a.getName() + " EMAIL: " + a.getEmail() + " ID: " + a.getMemberId());        
     }
-    return member;
+    return "---You have reached the end of the list----";
   }
 
   /**
@@ -69,7 +68,8 @@ public class BoatClubRegister {
     if (b == true) { 
       for (Member a : listOfMembers) {
         if (id.equals(a.getMemberId())) {
-          return "NAME: " + a.getName() + " EMAIL: " + a.getEmail() + " ID: " + a.getMemberId() + "\n";
+          return "NAME: " + a.getName() + " EMAIL: " + a.getEmail() 
+            + " ID: " + a.getMemberId() + "Boat: " + a.getBoat() + "\n";
         }
       }
     }
@@ -90,8 +90,34 @@ public class BoatClubRegister {
     return false;
   }
 
-  public void addBoat() {
-    
+  /**
+   * Adds a boat to a member.
+   *
+   * @param type - the type of boat.
+   * @param id - the members id.
+   */
+  public void addBoat(Boat type, String id) {
+    System.out.println("----addBoat-----");
+    for (Member a : listOfMembers) {
+      if (id.equals(a.getMemberId())) {
+        a.setBoat(type);
+      }
+    }
+  }
+
+  /**
+   * 
+   * @param id
+   * @return
+   */
+  public String listMemberBoat(String id) {
+    System.out.println("----List Member boat-----");
+    for (Member a : listOfMembers) {
+      if (id.equals(a.getMemberId())) {
+        return a.getBoat();
+      }
+    }
+    return "No boat was found";
   }
 
 

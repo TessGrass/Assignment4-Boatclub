@@ -61,11 +61,17 @@ public class Member {
     this.email = email;
   }
 
-  public Boat getBoat() {
+  /**
+   * Get the name of the members boat.
+   *
+   * @return The name of the boat.
+   */
+  public String getBoat() {
     for (Boat a : memberBoat) {
-      System.out.println("NAME: " + a.getName());
+      return a.getName();
+      
     }
-    return null;
+    return "No boat was found";
   }
 
   public void setBoat(Boat boat) {
