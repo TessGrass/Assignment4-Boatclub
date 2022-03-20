@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  *  Represents a id Validator class.
  */
-public class MemberIdValidator {
+public class MemberInfoValidator {
 
   /**
    * Checks if memberId is unique.
@@ -16,15 +16,13 @@ public class MemberIdValidator {
    */
   public Boolean runMemberIdValidator(ArrayList<Member> listOfMembers, String id) {
     System.out.println("----runIdValidator-----");
-    Boolean b = false;
+    Boolean bool = false;
     for (Member a : listOfMembers) {
       if (id.equals(a.getMemberId())) {
-        b = true;
-      } else {
-        continue;
+        bool = true;
       }
     }
-    return b;
+    return bool;
   }
 
   /**

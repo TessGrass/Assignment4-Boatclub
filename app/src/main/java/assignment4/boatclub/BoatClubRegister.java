@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class BoatClubRegister {
   ArrayList<Member> listOfMembers = new ArrayList<>();
   AlphaNumGenerator alphaNum = new AlphaNumGenerator();
-  MemberIdValidator validator = new MemberIdValidator();
+  MemberInfoValidator validator = new MemberInfoValidator();
 
 
   public BoatClubRegister() {
@@ -23,21 +23,20 @@ public class BoatClubRegister {
    */
   public Boolean addMember(String theName, String theEmail) {
     System.out.println("----addMember-----");
+    if (theEmail.length() < 1) {
+      theEmail = "N/A";
+    }
     Boolean email = validator.runMemberEmailValidator(listOfMembers, theEmail);
     if (email == true) {
       return true;
     }
     String memberId = alphaNum.alphaNumGen();
-    Boolean id = validator.runMemberIdValidator(listOfMembers, memberId);
-    
+    Boolean id = validator.runMemberIdValidator(listOfMembers, memberId);    
     if (id == true) {
       memberId = alphaNum.alphaNumGen();
     }  
     Member member = new Member(theName, theEmail, memberId);
     listOfMembers.add(member);
-    /* for (Member a : listOfMembers) {
-      System.out.println("NAME: " + a.getName() + " EMAIL: " + a.getEmail() + " ID: " + a.getMemberId());
-    } */
     return false;
   }
 
@@ -47,11 +46,12 @@ public class BoatClubRegister {
    * @return a list with all members.
    */
   public String listAllMembers() {
+    System.out.println("----list all members----");
     if (listOfMembers.size() < 1) {
       return "No members was found";
     }
     for (Member a : listOfMembers) {
-      System.out.println("NAME: " + a.getName() + " EMAIL: " + a.getEmail() + " ID: " + a.getMemberId());        
+      System.out.println("NAME: " + a.getName() + " EMAIL: " + a.getEmail() + " MEMBER-ID: " + a.getMemberId()); 
     }
     return "---You have reached the end of the list----";
   }
@@ -64,16 +64,16 @@ public class BoatClubRegister {
    */
   public String listSpecificMember(String id) {
     System.out.println("----listSpecificMember-----"); 
-    Boolean b = validator.runMemberIdValidator(listOfMembers, id);
-    if (b == true) { 
+    Boolean bool = validator.runMemberIdValidator(listOfMembers, id);
+    if (bool == true) { 
       for (Member a : listOfMembers) {
         if (id.equals(a.getMemberId())) {
           return "NAME: " + a.getName() + " EMAIL: " + a.getEmail() 
-            + " ID: " + a.getMemberId() + "Boat: " + a.getBoat() + "\n";
+            + " MEMBER-ID: " + a.getMemberId() + " BOAT: " + a.getBoat() + "\n";
         }
       }
     }
-    return "No Member Found";
+    return null;
   }
 
   /**
@@ -106,38 +106,37 @@ public class BoatClubRegister {
   }
 
   /**
-   * 
-   * @param id
-   * @return
+   * List member boat.
+   *
+   * @param id - the member id.
+   * @return - Boat details.
    */
   public String listMemberBoat(String id) {
     System.out.println("----List Member boat-----");
     for (Member a : listOfMembers) {
       if (id.equals(a.getMemberId())) {
-        return a.getBoat();
+        a.getBoatDetails();
       }
     }
     return "No boat was found";
   }
 
-
-
-  /* public boolean runValidator(String name) {
-    System.out.println("----runValidator-----");
-    Boolean b = false;
+  /**
+   * Delete a members boat.
+   *
+   * @param id - the name of the boat.
+   * @return message.
+   */
+  public String deleteMemberBoat(String name, String id) {
+    System.out.println("----Delete member boat-----");
     for (Member a : listOfMembers) {
-      System.out.println("for each");
-      System.out.println(name);
-      System.out.println(a.getName());
-      if (name.equals(a.getName())) {
-        System.out.println("if true");
-        b = true;
-      } else {
-        System.out.println("continue");
-        continue;
+      if (id.equalsIgnoreCase(a.getMemberId())) {
+        System.out.println("if-satsen delete");
+        a.deleteBoat(name);
+        return "The Boat was successfully deleted";
       }
     }
-    return b;
-  } */
+    return "No boat was found";
+  }
 }
 

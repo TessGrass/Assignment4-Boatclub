@@ -21,13 +21,13 @@ public class BoatFactory {
       return null;
     }
 
-    if (newBoatType.equalsIgnoreCase("Motorboat")) {
+    if (newBoatType.equalsIgnoreCase("A")) {
       return new Motorboat(theName, theLength, theHorsepower);
-    } else if (newBoatType.equalsIgnoreCase("Motorsailer")) {
+    } else if (newBoatType.equalsIgnoreCase("B")) {
       return new Motorsailer(theName, theLength, theHorsepower, theDepth);
-    } else if (newBoatType.equalsIgnoreCase("Sailboat")) {
+    } else if (newBoatType.equalsIgnoreCase("C")) {
       return new Sailboat(theName, theLength, theDepth);
-    } else if (newBoatType.equalsIgnoreCase("Canoe")) {
+    } else if (newBoatType.equalsIgnoreCase("D")) {
       return new Canoe(theName, theLength);
     }
     return null;

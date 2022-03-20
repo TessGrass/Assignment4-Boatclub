@@ -29,5 +29,13 @@ public class Sailboat extends Boat {
     } else {
       System.out.println("The depth of the boat must be deeper than zero meters.");
     }
-  }  
+  }
+
+  @Override
+  public String getBoatDetails() {
+    if (this.depth == 0) {
+      return "NAME: " + getName() + " LENGTH " +  getLength() + " meters";
+    }
+    return "NAME: " + getName() + " LENGTH " +  getLength() + " DEPTH: " + getDepth();
+  }
 }

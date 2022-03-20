@@ -22,5 +22,12 @@ public class Motorboat extends Boat {
   public void setHorsepower(int theHorsepower) {
     this.horsepower = theHorsepower;
   }
-  
+
+  @Override
+  public String getBoatDetails() {
+    if (this.horsepower == 0) {
+      return "NAME: " + getName() + " LENGTH " +  getLength() + " meters";
+    }
+    return "NAME: " + getName() + " LENGTH " +  getLength() + " HORSEPOWER: " + getHorsepower() + "hk";
+  }
 }

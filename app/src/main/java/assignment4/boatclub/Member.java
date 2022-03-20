@@ -53,7 +53,15 @@ public class Member {
     this.memberId = memberId;
   }
 
+  /**
+   * Gets member email.
+   *
+   * @return email if available, else empty string.
+   */
   public String getEmail() {
+    if (this.email.equalsIgnoreCase("N/A")) {
+      return "";
+    }
     return email;
   }
 
@@ -69,7 +77,7 @@ public class Member {
   public String getBoat() {
     for (Boat a : memberBoat) {
       return a.getName();
-      
+
     }
     return "No boat was found";
   }
@@ -77,5 +85,25 @@ public class Member {
   public void setBoat(Boat boat) {
     memberBoat.add(boat);
   }
+
+  /**
+   * Get boat details.
+   */
+  public void getBoatDetails() {
+    for (Boat a : memberBoat) {
+      System.out.print(a.getBoatDetails());
+    }
+  }
   
+  public Boolean deleteBoat(String boat) {
+    Boolean bool = false;
+    System.out.println("-delete in member");
+    for (Boat a : memberBoat) {
+      if (boat.equalsIgnoreCase(a.getName())) {
+        memberBoat.remove(a);
+        return true;
+      }
+    }
+    return bool;
+ }
 }

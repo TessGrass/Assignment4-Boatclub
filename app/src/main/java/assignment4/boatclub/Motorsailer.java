@@ -40,4 +40,17 @@ public class Motorsailer extends Boat {
   public void setHorsepower(int theHorsepower) {
     this.horsepower = theHorsepower;
   }
+
+  @Override
+  public String getBoatDetails() {
+    if (this.horsepower > 0 && this.depth > 0) {
+      return "NAME: " + getName() + " LENGTH " +  getLength() 
+        + " HORSEPOWER: " + getHorsepower() + "hk" + " DEPTH: " + getDepth();
+    } else if (this.horsepower > 0) {
+      return "NAME: " + getName() + " LENGTH " +  getLength() + " meters" + " HORSEPOWER: " + getHorsepower() + "hk";
+    } else if (this.depth > 0) {
+      return "NAME: " + getName() + " LENGTH " +  getLength() + " meters" + " DEPTH: " + getDepth();
+    }
+    return "NAME: " + getName() + " LENGTH " +  getLength() + " meters";
+  }
 }
