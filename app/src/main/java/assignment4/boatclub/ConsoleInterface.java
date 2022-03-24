@@ -1,47 +1,24 @@
 package assignment4.boatclub;
 
-import java.util.Scanner;
-
 /**
  * Represents the main application of a boat club.
  */
 public class ConsoleInterface {
-  /* private BoatClubRegister register = new BoatClubRegister();
-  private BoatFactory boatFactory = new BoatFactory();
-  private Scanner scan = new Scanner(System.in); */
 
   /**
    * The consoleUi of the Boat Club.
    */
   public void consoleUi() {
-
     System.out.println();
     System.out.println("----------------------------------------\n"
                       + "| WELCOME TO THIS EXCLUSIVE BOAT CLUB! |\n"
                       + "----------------------------------------\n"
                       + "Please make your choice from the menu below:\n"
                       + "1. Add a new member to the boat club\n"
-                      + "2. List all members / Edit a specific member\n"
-                      + "3. Exit the application");
-
-  
+                      + "2. List all members / Edit a specific member / Add boat\n"
+                      + "3. Exit the application");  
     System.out.print("\nChoose a number: ");
-      /* int input = scan.nextInt();
-      scan.nextLine(); */
-
-     /*  if (input == 1) {
-        addMember();
-      } else if (input == 2) {
-        listMembers();
-      } else if (input == 3) {
-        exitProgram();
-      } else {
-        System.out.println("\n ! Please enter a valid number from the menu ! \n");
-      } */
-
   }
-
-  // FROM METHOD ADDMEMBER //
 
   public void askForMemberName() {
     System.out.print("Add a name: ");
@@ -58,7 +35,6 @@ public class ConsoleInterface {
   public void createMemberDone() {
     System.out.println("\nThe member was successfully created!");
   }
-
 
   public void noMembersAvailable() {
     System.out.println("\nNo members currently available");
@@ -87,6 +63,9 @@ public class ConsoleInterface {
   public void askForBoatType() {
     System.out.println("We accept the following type of boats: \n" + "A) Motorboat \n"
           + "B) MotorSailer \n" + "C) Sailboat \n" + "D) Canoe");
+  }
+
+  public void askForBoatTypeInput() {
     System.out.print("Enter A, B, C, or D to add: ");
   }
 
@@ -126,9 +105,9 @@ public class ConsoleInterface {
     System.out.println("\nSomething went wrong. Returning to menu.");
   }
 
-
-
- 
+  public void wrongInput() {
+    System.out.println("Wrong input. You will need to try again.");
+  }
   
 
   /**

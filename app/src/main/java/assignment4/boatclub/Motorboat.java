@@ -20,12 +20,12 @@ public class Motorboat extends Boat {
     return horsepower;
   }
 
-  public String getBoatType() {
-    return boatType;
-  }
-
   public void setHorsepower(int theHorsepower) {
     this.horsepower = theHorsepower;
+  }
+
+  public String getBoatType() {
+    return boatType;
   }
 
   @Override

@@ -38,9 +38,6 @@ public class Sailboat extends Boat {
 
   @Override
   public String getBoatDetails() {
-    if (this.depth == 0) {
-      return "TYPE: " + boatType + " NAME: " + getName() + " LENGTH " +  getLength() + " meters ";
-    }
     return "TYPE: " + boatType + " NAME: " + getName() + " LENGTH " +  getLength() + " DEPTH: " + getDepth() + " ";
   }
 }

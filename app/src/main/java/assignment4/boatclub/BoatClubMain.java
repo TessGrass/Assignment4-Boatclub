@@ -26,7 +26,6 @@ public class BoatClubMain {
    * Start menu.
    */
   public void inputFromMenu() {
-    System.out.println("Inputfrommenu");
     console.consoleUi();
     int input = scan.nextInt();
     scan.nextLine();
@@ -105,7 +104,7 @@ public class BoatClubMain {
       }
       inputFromMenu();
     } catch (Exception e) {
-      System.out.println("Something went wrong. Returning to menu.");
+      console.errorMessage();
       inputFromMenu();
     }
   }
@@ -119,31 +118,39 @@ public class BoatClubMain {
     try {
       int boatPower = 0;
       int boatDepth = 0;
-      System.out.println("addboattomember");
+
       console.askForBoatType();
+      console.askForBoatTypeInput();
       String boatType = scan.nextLine(); 
       console.askForBoatName();
       String boatName = scan.nextLine();
       console.askForBoatLength();
       int boatLength = scan.nextInt();
+      boatLength = validateLength(boatLength);
+    
       if (boatType.equalsIgnoreCase("A")) {
         console.askForHorsePower();
         boatPower = scan.nextInt();
+        boatPower = validateHorsepower(boatPower);
       } else if (boatType.equalsIgnoreCase("B")) {
         console.askForHorsePower();
         boatPower = scan.nextInt();
+        boatPower = validateHorsepower(boatPower);
         console.askForBoatDepth();
         boatDepth = scan.nextInt();
+        boatDepth = validateDepth(boatDepth);
       } else if (boatType.equalsIgnoreCase("C")) {
         console.askForBoatDepth();
         boatDepth = scan.nextInt();
+        boatDepth = validateDepth(boatDepth);
       }
+
       Boat memberBoat = boatFactory.makeBoat(boatType, boatName, boatLength, boatPower, boatDepth);
       register.addBoat(memberBoat, id);
       console.boatAddedToMember();
       inputFromMenu();
     } catch (Exception e) {
-      System.out.println("Something went wrong. Returning to menu.");
+      console.errorMessage();
       inputFromMenu();
     } 
   }
@@ -165,9 +172,72 @@ public class BoatClubMain {
       String input = scan.nextLine();
       deleteBoat(input, id);
     } catch (Exception e) {
-      System.out.println("Something went wrong. Returning to menu.");
+      console.errorMessage();
       inputFromMenu();
     }
+  }
+
+  /**
+   * Validate horsepower.
+   *
+   * @param power - horsepower from user input.
+   * @return correct horsepower.
+   */
+  public int validateHorsepower(int power) {
+    int boatPower = power;
+    Boolean bool = true;
+    while (bool) {
+      if (boatPower > 0 && boatPower < 11000) {
+        bool = false;
+        return boatPower;
+      }
+      console.wrongInput();
+      console.askForHorsePower();
+      boatPower = scan.nextInt();
+    }
+    return boatPower;
+  }
+
+  /**
+   * Validate depth.
+   *
+   * @param depth - depth from user input.
+   * @return correct depth.
+   */
+  public int validateDepth(int depth) {
+    int boatDepth = depth;
+    Boolean bool = true;
+    while (bool) {
+      if (boatDepth > 0 && boatDepth < 30) {
+        bool = false;
+        return boatDepth;
+      }
+      console.wrongInput();
+      console.askForBoatDepth();
+      boatDepth = scan.nextInt();
+    }
+    return boatDepth;
+  }
+
+  /**
+   * Validate length.
+   *
+   * @param length - length from user input.
+   * @return correct length.
+   */
+  public int validateLength(int length) {
+    int boatLength = length;
+    Boolean bool = true;
+    while (bool) {
+      if (boatLength > 0 && boatLength < 80) {
+        bool = false;
+        return boatLength;
+      }
+      console.wrongInput();
+      console.askForBoatLength();
+      boatLength = scan.nextInt();
+    }
+    return boatLength;
   }
 
   /**
