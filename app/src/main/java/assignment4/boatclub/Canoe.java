@@ -4,6 +4,7 @@ package assignment4.boatclub;
  * Represents a Canoe class.
  */
 public class Canoe extends Boat {
+  private String boatType = "Canoe";
   
   public Canoe() {
   }
@@ -12,9 +13,12 @@ public class Canoe extends Boat {
     super(name, length);
   }
 
+  public String getBoatType() {
+    return boatType;
+  }
+
   @Override
   public String getBoatDetails() {
-    // TODO Auto-generated method stub
-    return null;
+    return "TYPE: " + boatType + " NAME: " + getName() + " LENGTH " +  getLength() + " meters";
   }
 }

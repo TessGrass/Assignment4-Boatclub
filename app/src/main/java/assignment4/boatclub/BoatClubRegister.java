@@ -48,7 +48,7 @@ public class BoatClubRegister {
   public String listAllMembers() {
     System.out.println("----list all members----");
     if (listOfMembers.size() < 1) {
-      return "No members was found";
+      return null;
     }
     for (Member a : listOfMembers) {
       System.out.println("NAME: " + a.getName() + " EMAIL: " + a.getEmail() + " MEMBER-ID: " + a.getMemberId()); 
@@ -111,14 +111,15 @@ public class BoatClubRegister {
    * @param id - the member id.
    * @return - Boat details.
    */
-  public String listMemberBoat(String id) {
+  public Boolean listMemberBoat(String id) {
     System.out.println("----List Member boat-----");
     for (Member a : listOfMembers) {
-      if (id.equals(a.getMemberId())) {
+      if (id.equals(a.getMemberId()) && a.getBoat() != "-") {
         a.getBoatDetails();
+        return true;
       }
     }
-    return "No boat was found";
+    return false;
   }
 
   /**
@@ -131,12 +132,11 @@ public class BoatClubRegister {
     System.out.println("----Delete member boat-----");
     for (Member a : listOfMembers) {
       if (id.equalsIgnoreCase(a.getMemberId())) {
-        System.out.println("if-satsen delete");
         a.deleteBoat(name);
         return "The Boat was successfully deleted";
       }
     }
-    return "No boat was found";
+    return null;
   }
 }
 

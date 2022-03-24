@@ -6,6 +6,7 @@ package assignment4.boatclub;
 public class Motorsailer extends Boat {
   private int depth;
   private int horsepower;
+  private String boatType = "Motorsailer";
 
   public Motorsailer() {
 
@@ -41,16 +42,22 @@ public class Motorsailer extends Boat {
     this.horsepower = theHorsepower;
   }
 
+  public String getBoatType() {
+    return boatType;
+  }
+
   @Override
   public String getBoatDetails() {
     if (this.horsepower > 0 && this.depth > 0) {
-      return "NAME: " + getName() + " LENGTH " +  getLength() 
+      return " TYPE: " + boatType + " NAME: " + getName() + " LENGTH " +  getLength() + " meters " 
         + " HORSEPOWER: " + getHorsepower() + "hk" + " DEPTH: " + getDepth();
     } else if (this.horsepower > 0) {
-      return "NAME: " + getName() + " LENGTH " +  getLength() + " meters" + " HORSEPOWER: " + getHorsepower() + "hk";
+      return "TYPE: " + boatType + " NAME: " + getName() 
+          + " LENGTH " +  getLength() + " meters" + " HORSEPOWER: " + getHorsepower() + "hk ";
     } else if (this.depth > 0) {
-      return "NAME: " + getName() + " LENGTH " +  getLength() + " meters" + " DEPTH: " + getDepth();
+      return "TYPE: " + boatType + " NAME: " + getName() 
+        + " LENGTH " +  getLength() + " meters" + " DEPTH: " + getDepth();
     }
-    return "NAME: " + getName() + " LENGTH " +  getLength() + " meters";
+    return "TYPE: " + boatType + " NAME: " + getName() + " LENGTH " +  getLength() + " meters ";
   }
 }

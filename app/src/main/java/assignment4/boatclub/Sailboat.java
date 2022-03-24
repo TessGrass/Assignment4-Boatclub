@@ -5,6 +5,7 @@ package assignment4.boatclub;
  */
 public class Sailboat extends Boat {
   private int depth;
+  private String boatType = "Sailboat";
 
   public Sailboat() {
 
@@ -16,6 +17,10 @@ public class Sailboat extends Boat {
 
   public int getDepth() {
     return depth;
+  }
+
+  public String getBoatType() {
+    return boatType;
   }
 
   /**
@@ -34,8 +39,8 @@ public class Sailboat extends Boat {
   @Override
   public String getBoatDetails() {
     if (this.depth == 0) {
-      return "NAME: " + getName() + " LENGTH " +  getLength() + " meters";
+      return "TYPE: " + boatType + " NAME: " + getName() + " LENGTH " +  getLength() + " meters ";
     }
-    return "NAME: " + getName() + " LENGTH " +  getLength() + " DEPTH: " + getDepth();
+    return "TYPE: " + boatType + " NAME: " + getName() + " LENGTH " +  getLength() + " DEPTH: " + getDepth() + " ";
   }
 }

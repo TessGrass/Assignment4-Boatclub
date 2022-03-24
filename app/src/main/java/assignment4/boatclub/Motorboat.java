@@ -4,7 +4,8 @@ package assignment4.boatclub;
  * Represents a Motorboat class.
  */
 public class Motorboat extends Boat {
-  private int horsepower;  
+  private int horsepower;
+  private String boatType = "Motorboat";
 
   public Motorboat() {
 
@@ -19,15 +20,17 @@ public class Motorboat extends Boat {
     return horsepower;
   }
 
+  public String getBoatType() {
+    return boatType;
+  }
+
   public void setHorsepower(int theHorsepower) {
     this.horsepower = theHorsepower;
   }
 
   @Override
   public String getBoatDetails() {
-    if (this.horsepower == 0) {
-      return "NAME: " + getName() + " LENGTH " +  getLength() + " meters";
-    }
-    return "NAME: " + getName() + " LENGTH " +  getLength() + " HORSEPOWER: " + getHorsepower() + "hk";
+    return "TYPE: " + boatType + " NAME: " + getName() 
+      + " LENGTH " +  getLength() + " meters" + " HORSEPOWER: " + getHorsepower() + "hk ";
   }
 }

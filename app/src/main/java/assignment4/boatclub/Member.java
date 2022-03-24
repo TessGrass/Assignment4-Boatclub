@@ -79,7 +79,7 @@ public class Member {
       return a.getName();
 
     }
-    return "No boat was found";
+    return "-";
   }
 
   public void setBoat(Boat boat) {
@@ -95,6 +95,12 @@ public class Member {
     }
   }
   
+  /**
+   * Delete's a members boat.
+   *
+   * @param boat - The boat.
+   * @return boolean.
+   */
   public Boolean deleteBoat(String boat) {
     Boolean bool = false;
     System.out.println("-delete in member");
@@ -105,5 +111,5 @@ public class Member {
       }
     }
     return bool;
- }
+  }
 }
