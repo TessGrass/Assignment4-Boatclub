@@ -38,6 +38,12 @@ public class Sailboat extends Boat {
 
   @Override
   public String getBoatDetails() {
-    return "TYPE: " + boatType + " NAME: " + getName() + " LENGTH " +  getLength() + " DEPTH: " + getDepth() + " ";
+    return "TYPE: " + getBoatType() + " NAME: " + getName() + " LENGTH " +  getLength() + " DEPTH: " + getDepth() + " ";
+  }
+
+  @Override
+  public String fileToString() {
+    return "\nBOAT: " + getName() + ":" + getBoatType() + ":" + getLength() + ":" + getDepth();
+   
   }
 }

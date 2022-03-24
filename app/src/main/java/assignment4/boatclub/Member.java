@@ -103,7 +103,6 @@ public class Member {
    */
   public Boolean deleteBoat(String boat) {
     Boolean bool = false;
-    System.out.println("-delete in member");
     for (Boat a : memberBoat) {
       if (boat.equalsIgnoreCase(a.getName())) {
         memberBoat.remove(a);
@@ -111,5 +110,9 @@ public class Member {
       }
     }
     return bool;
+  }
+
+  public String memberToString() {
+    return "MEMBER" + getName() + ":" + getEmail() + ":" + getMemberId();
   }
 }

@@ -9,7 +9,7 @@ public class BoatClubMain {
   private ConsoleInterface console = new ConsoleInterface();
   private BoatClubRegister register = new BoatClubRegister();
   private BoatFactory boatFactory = new BoatFactory();
-  private Scanner scan = new Scanner(System.in);
+  private Scanner scan = new Scanner(System.in, "UTF-8");
 
   /**
      * Main method of the program.
@@ -19,8 +19,7 @@ public class BoatClubMain {
   public static void main(String[] args) {
     BoatClubMain boatClub = new BoatClubMain(); 
     boatClub.inputFromMenu();  
-  }
-  
+  }  
     
   /**
    * Start menu.
@@ -29,17 +28,15 @@ public class BoatClubMain {
     console.consoleUi();
     int input = scan.nextInt();
     scan.nextLine();
-
-    while (true) {
-      if (input == 1) {
-        addMember();
-      } else if (input == 2) {
-        listMembers();
-      } else if (input == 3) {
-        exitProgram();
-      } else {
-        System.out.println("\n ! Please enter a valid number from the menu ! \n");
-      }
+    if (input == 1) {
+      addMember();
+    } else if (input == 2) {
+      listMembers();
+    } else if (input == 3) {
+      exitProgram();
+    } else {
+      console.errorWrongInputStartMenu();
+      inputFromMenu();
     }
   }
 
@@ -79,7 +76,9 @@ public class BoatClubMain {
         inputFromMenu();
       }
       console.askForInputInListMenu();
-      input = scan.nextLine();
+      String inputFromUser = scan.nextLine();
+      input = inputFromUser.toLowerCase();
+      validateInput(input);
       if (input.equalsIgnoreCase("D")) {
         inputFromMenu();
       }
@@ -118,12 +117,13 @@ public class BoatClubMain {
     try {
       int boatPower = 0;
       int boatDepth = 0;
-
       console.askForBoatType();
       console.askForBoatTypeInput();
-      String boatType = scan.nextLine(); 
+      String boatType = null;
+      boatType = scan.nextLine(); 
       console.askForBoatName();
-      String boatName = scan.nextLine();
+      String boatName = null;
+      boatName = scan.nextLine();
       console.askForBoatLength();
       int boatLength = scan.nextInt();
       boatLength = validateLength(boatLength);
@@ -162,7 +162,6 @@ public class BoatClubMain {
    */
   public void listMembersAllBoats(String id) {
     try {
-      System.out.println("listmembersboat");
       Boolean bool = register.listMemberBoat(id);
       if (!bool) {
         console.noBoatsWasFound();
@@ -178,6 +177,26 @@ public class BoatClubMain {
   }
 
   /**
+   * Validate input from menu.
+   *
+   * @param in the input.
+   * @return input
+   */
+  public String validateInput(String in) {
+    String input = in;
+    Boolean bool = true;
+    while (bool) {
+      if (input.equals("a") || input.equals("b") || input.equals("c") || input.equals("d")) {
+        return input;
+      }
+      console.wrongInput();
+      console.askForInputInListMenu();
+      input = scan.nextLine();
+    }
+    return input;
+  }
+
+  /**
    * Validate horsepower.
    *
    * @param power - horsepower from user input.
@@ -189,7 +208,6 @@ public class BoatClubMain {
     while (bool) {
       if (boatPower > 0 && boatPower < 11000) {
         bool = false;
-        return boatPower;
       }
       console.wrongInput();
       console.askForHorsePower();
@@ -210,11 +228,11 @@ public class BoatClubMain {
     while (bool) {
       if (boatDepth > 0 && boatDepth < 30) {
         bool = false;
-        return boatDepth;
+      } else {
+        console.wrongInput();
+        console.askForBoatDepth();
+        boatDepth = scan.nextInt();
       }
-      console.wrongInput();
-      console.askForBoatDepth();
-      boatDepth = scan.nextInt();
     }
     return boatDepth;
   }
@@ -231,7 +249,6 @@ public class BoatClubMain {
     while (bool) {
       if (boatLength > 0 && boatLength < 80) {
         bool = false;
-        return boatLength;
       }
       console.wrongInput();
       console.askForBoatLength();

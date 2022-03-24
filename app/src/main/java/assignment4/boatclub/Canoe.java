@@ -21,4 +21,9 @@ public class Canoe extends Boat {
   public String getBoatDetails() {
     return "TYPE: " + boatType + " NAME: " + getName() + " LENGTH " +  getLength() + " meters";
   }
+
+  @Override
+  public String fileToString() {
+    return "\nBOAT: " + getName() + ":" + getBoatType() + ":" + getLength();
+  }
 }
