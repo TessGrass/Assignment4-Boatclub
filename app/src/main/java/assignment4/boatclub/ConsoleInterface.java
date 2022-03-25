@@ -99,7 +99,7 @@ public class ConsoleInterface {
   }
 
   public void closeProgram() {
-    System.out.print("\nProgram terminated");
+    System.out.print("\nProgram closed");
   }
 
   public void errorMessage() {

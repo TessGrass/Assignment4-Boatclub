@@ -280,11 +280,15 @@ public class BoatClubMain {
     register.deleteMemberBoat(boat, id);
   }
 
-  public void init() {
+  private void init() {
     register.readFromFile();
   }
 
+  /**
+   * Exits the program.
+   */
   public void exitProgram() {
+    scan.close();
     console.closeProgram();
     System.exit(0);
   }
