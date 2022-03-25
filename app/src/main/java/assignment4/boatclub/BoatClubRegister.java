@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 
@@ -30,7 +31,6 @@ public class BoatClubRegister {
    * @param theEmail - The email.
    */
   public Boolean addMember(String theName, String theEmail) {
-    System.out.println("----addMember-----");
     if (theEmail.length() < 1) {
       theEmail = "N/A";
     }
@@ -54,7 +54,6 @@ public class BoatClubRegister {
    * @return a list with all members.
    */
   public String listAllMembers() {
-    System.out.println("----list all members----");
     if (listOfMembers.size() < 1) {
       return null;
     }
@@ -65,30 +64,9 @@ public class BoatClubRegister {
   }
 
   /**
-   * List a specific member.
-   *
-   * @param id - The id for a member.
-   * @return Returns member if found, else return No Member Found.
-   */
-  /* public String listSpecificMember(String id) {
-    System.out.println("----listSpecificMember-----"); 
-    Boolean bool = validator.runMemberIdValidator(listOfMembers, id);
-    if (bool == true) { 
-      for (Member a : listOfMembers) {
-        if (id.equals(a.getMemberId())) {
-          return "NAME: " + a.getName() + " EMAIL: " + a.getEmail() 
-            + " MEMBER-ID: " + a.getMemberId() + " BOAT: " + a.getBoat() + "\n";
-        }
-      }
-    }
-    return null;
-  } */
-
-  /**
    * Delete a member.
    */
   public Boolean deleteMember(String id) {
-    System.out.println("----deleteMember-----");
     for (Member a : listOfMembers) {
       if (id.equals(a.getMemberId())) {
         listOfMembers.remove(a);
@@ -105,7 +83,6 @@ public class BoatClubRegister {
    * @param id - the members id.
    */
   public String addBoat(Boat type, String id) {
-    System.out.println("----addBoat-----");
     for (Member a : listOfMembers) {
       if (id.equals(a.getMemberId())) {
         a.setBoat(type);
@@ -121,7 +98,6 @@ public class BoatClubRegister {
    * @return - Boat details.
    */
   public Boolean listMemberBoat(String id) {
-    System.out.println("----List Member boat-----");
     for (Member a : listOfMembers) {
       if (id.equals(a.getMemberId()) && a.getBoat() != "-") {
         a.getBoatDetails();
@@ -138,7 +114,6 @@ public class BoatClubRegister {
    * @return message.
    */
   public String deleteMemberBoat(String name, String id) {
-    System.out.println("----Delete member boat-----");
     for (Member a : listOfMembers) {
       if (id.equalsIgnoreCase(a.getMemberId())) {
         a.deleteBoat(name);
@@ -148,11 +123,12 @@ public class BoatClubRegister {
     return null;
   }
 
+  /**
+   * writeToFile.
+   */
   public void writeToFile() {
-    // String projectPath = ("/src/main/java/assignment4/registry/registry.data");
-    // String relativeToAbsolute = new File("").getAbsolutePath();
     try {
-      BufferedWriter writer = new BufferedWriter(new FileWriter(filePath + url));
+      BufferedWriter writer = new BufferedWriter(new FileWriter(filePath + url, StandardCharsets.UTF_8));
       for (Member a : listOfMembers) {
         writer.write(a.memberToString());
         writer.write(a.boatToString());
@@ -168,17 +144,18 @@ public class BoatClubRegister {
     }   
   }
 
+  /**
+   * Read from file.
+   */
   public void readFromFile() {
-    String projectPath = ("/src/main/java/assignment4/registry/registry.data");
-    String relativeToAbsolute = new File("").getAbsolutePath();
     String[] parts = null;
     int theHorsepower = 0;
     int theDepth = 0;
     String id = null;
     try {
-      BufferedReader reader = new BufferedReader(new FileReader(filePath + url));
+      BufferedReader reader = new BufferedReader(new FileReader(filePath + url, StandardCharsets.UTF_8));
       String line;
-       if (reader.readLine() != null)  
+      if (reader.readLine() != null) {
         while ((line = reader.readLine()) != null) {
           parts = line.split(":");
           if (parts[0].equalsIgnoreCase("member")) {
@@ -204,14 +181,10 @@ public class BoatClubRegister {
               String theName = parts[1];
               Boat memberBoat = boatFactory.makeBoat("D", theName, theLength, theHorsepower, theDepth);
               addBoat(memberBoat, id);  
+            }
           }
         }
-         /*  if ("Boat".equalsIgnoreCase(parts[0])) {
-            System.out.print("här");
-            System.out.print(parts[1]);
-            // do something
-        } */
-    }
+      }
       reader.close();
     } catch (IOException e) {
       e.printStackTrace();
@@ -219,42 +192,3 @@ public class BoatClubRegister {
 
   }
 }
-
-// 0=Boat, 1=namn 2=typ 3=längd 4=Horsepower 5=depth
-/* for(String element: parts) {
-  if(element == "Member") {
-    
-  }
-} */
-/* for(int i = 0; i < parts.length(); i++) {    */
-
-        // System.out.println(Arrays.toString(parts));
-       /*      for (String element: parts) { */
-
-            /* System.out.println(); */
-         /*  System.out.println(element);
-          str.add(element); */
-      /* } */
-     /*  for(int i = 0; i < str.size(); i++) {   
-        Member member = new Member(str[1], str[2], str[3]);
-        listOfMembers.add(member);
-    }   */
-      /* for (String i = 0;  < parts.length; i++) {
-        Member member = new Member(parts[1], parts[1], parts[1]);
-      }
-       */
-        // System.out.print(parts[1]);
-        /* Member member = new Member(parts[1], parts[1], parts[1]);
-        listOfMembers.add(member); */
-        /* for (String element: parts) {
-          System.out.print
-          System.out.println(element);
-      } */
-      // Member member = new Member(parts[0], parts[1], parts[2]);
-       //System.out.print(parts[0]);
-       //System.out.print(parts[1]);
-       /* System.out.print(parts[2]);
-       System.out.print(parts[3]); */
-        /* Member member = new Member(parts[0], parts[1], parts[2]);
-        listOfMembers.add(member); */
-

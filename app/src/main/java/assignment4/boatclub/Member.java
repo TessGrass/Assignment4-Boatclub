@@ -104,9 +104,7 @@ public class Member {
   public Boolean deleteBoat(String boat) {
     Boolean bool = false;
     for (Boat a : memberBoat) {
-      System.out.print(boat);
       if (boat.equalsIgnoreCase(a.getName())) {
-        System.out.print(a);
         memberBoat.remove(a);
         return true;
       }
@@ -114,6 +112,11 @@ public class Member {
     return bool;
   }
 
+  /**
+   * Calling on detail´to string method in boat.
+   *
+   * @return line.
+   */
   public String boatToString() {
     String line = "";
     for (Boat b : memberBoat) {

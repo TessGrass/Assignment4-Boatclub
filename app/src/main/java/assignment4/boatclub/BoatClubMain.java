@@ -43,7 +43,6 @@ public class BoatClubMain {
         inputFromMenu();
       }
     } catch (Exception e) {
-      System.out.print("1");
       console.errorMessage();
       inputFromMenu();
     }
@@ -98,14 +97,6 @@ public class BoatClubMain {
       String id = scan.nextLine();
       if (input.equalsIgnoreCase("A")) {
         listMembersAllBoats(id);
-        // System.out.println(register.listSpecificMember(id));
-        //console.askForInputInMemberMenu();
-        // input = scan.nextLine();
-        /* if (input.equalsIgnoreCase("A")) {
-          listMembersAllBoats(id);
-        } else {
-          inputFromMenu();
-        } */
       } else if (input.equalsIgnoreCase("B")) {
         addBoatToMember(id);
       } else if (input.equalsIgnoreCase("C")) {
@@ -286,7 +277,6 @@ public class BoatClubMain {
    * @param id - the id.
    */
   public void deleteBoat(String boat, String id) {
-    System.out.println("---deletemethod main----");
     register.deleteMemberBoat(boat, id);
   }
 

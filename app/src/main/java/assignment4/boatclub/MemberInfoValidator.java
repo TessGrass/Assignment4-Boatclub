@@ -15,7 +15,6 @@ public class MemberInfoValidator {
    * @return boolean.
    */
   public Boolean runMemberIdValidator(ArrayList<Member> listOfMembers, String id) {
-    System.out.println("----runIdValidator-----");
     Boolean bool = false;
     for (Member a : listOfMembers) {
       if (id.equals(a.getMemberId())) {
@@ -33,7 +32,6 @@ public class MemberInfoValidator {
    * @return a boolean.
    */
   public Boolean runMemberEmailValidator(ArrayList<Member> listOfMembers, String theEmail) {
-    System.out.println("----runEmailValidator-----");
     Boolean bool = false;
     if (theEmail.equals("N/A")) {
       return bool;
