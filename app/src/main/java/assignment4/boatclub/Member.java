@@ -91,7 +91,7 @@ public class Member {
    */
   public void getBoatDetails() {
     for (Boat a : memberBoat) {
-      System.out.print(a.getBoatDetails());
+      System.out.println(a.getBoatDetails());
     }
   }
   
@@ -104,7 +104,9 @@ public class Member {
   public Boolean deleteBoat(String boat) {
     Boolean bool = false;
     for (Boat a : memberBoat) {
+      System.out.print(boat);
       if (boat.equalsIgnoreCase(a.getName())) {
+        System.out.print(a);
         memberBoat.remove(a);
         return true;
       }
@@ -112,7 +114,15 @@ public class Member {
     return bool;
   }
 
+  public String boatToString() {
+    String line = "";
+    for (Boat b : memberBoat) {
+      line += b.detailsToString();
+    }
+    return line;
+  }
+
   public String memberToString() {
-    return "MEMBER" + getName() + ":" + getEmail() + ":" + getMemberId();
+    return "\nMEMBER:" + getName() + ":" + getEmail() + ":" + getMemberId();
   }
 }

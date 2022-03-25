@@ -15,7 +15,7 @@ public class ConsoleInterface {
                       + "----------------------------------------\n"
                       + "Please make your choice from the menu below:\n"
                       + "1. Add a new member to the boat club\n"
-                      + "2. List all members / Edit a specific member / Add boat\n"
+                      + "2. List all members / List member's boats / Add boat\n"
                       + "3. Exit the application");  
     System.out.print("\nChoose a number: ");
   }
@@ -41,7 +41,7 @@ public class ConsoleInterface {
   }
 
   public void askForInputInListMenu() {
-    System.out.print("A) Get more info about a member\nB) Add boat to member\nC) Delete member\nD) Return to menu\n"
+    System.out.print("A) List a member's boats\nB) Add boat to member\nC) Delete member\nD) Return to menu\n"
          + "Choose A, B, C or D to continue: ");
   }
   
@@ -49,12 +49,12 @@ public class ConsoleInterface {
     System.out.print("Enter a members id: ");
   }
 
-  public void askForInputInMemberMenu() {
-    System.out.print("A) Get details of a specific boat\n" + "B) Quit to menu\n" + "Choose A or B to continue: ");
+  /* public void askForInputInMemberMenu() {
+    System.out.print("A) Get details of the boats\n" + "B) Quit to menu\n" + "Choose A or B to continue: ");
   }
-
+ */
   public void deleteMember() {
-    System.out.println("The member is deleted\n");
+    System.out.println("\nThe member is deleted");
   }
 
   public void askForBoatType() {
@@ -94,8 +94,12 @@ public class ConsoleInterface {
     System.out.print("\nA) Delete a boat\n" + "B) Quit to menu\nChoose A or B to continue: ");    
   }
 
+  public void askForBoatNameDelete() {
+    System.out.print("Enter the name of boat you want to delete: ");
+  }
+
   public void closeProgram() {
-    System.out.print("Program terminated");
+    System.out.print("\nProgram terminated");
   }
 
   public void errorMessage() {
@@ -103,7 +107,7 @@ public class ConsoleInterface {
   }
 
   public void wrongInput() {
-    System.out.println("Wrong input. Try again.");
+    System.out.println("\nWrong input. Try again.\n");
   }
 
   public void errorWrongInputStartMenu() {

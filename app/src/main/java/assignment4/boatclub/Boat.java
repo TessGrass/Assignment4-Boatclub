@@ -53,5 +53,5 @@ public abstract class Boat {
 
   public abstract String getBoatDetails();
 
-  public abstract String fileToString();
+  public abstract String detailsToString();
 }

@@ -23,7 +23,7 @@ public class Canoe extends Boat {
   }
 
   @Override
-  public String fileToString() {
-    return "\nBOAT: " + getName() + ":" + getBoatType() + ":" + getLength();
+  public String detailsToString() {
+    return "\nBOAT:" + getName() + ":" + getBoatType() + ":" + getLength();
   }
 }

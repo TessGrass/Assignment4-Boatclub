@@ -53,7 +53,7 @@ public class Motorsailer extends Boat {
   }
 
   @Override
-  public String fileToString() {
-    return "\nBOAT: " + getName() + ":" + getBoatType() + ":" + getLength() + ":" + getDepth() + ":" + getHorsepower();
+  public String detailsToString() {
+    return "\nBOAT:" + getName() + ":" + getBoatType() + ":" + getLength() + ":" + getDepth() + ":" + getHorsepower();
   }
 }

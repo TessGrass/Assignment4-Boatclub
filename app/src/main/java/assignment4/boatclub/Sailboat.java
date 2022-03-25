@@ -42,8 +42,8 @@ public class Sailboat extends Boat {
   }
 
   @Override
-  public String fileToString() {
-    return "\nBOAT: " + getName() + ":" + getBoatType() + ":" + getLength() + ":" + getDepth();
+  public String detailsToString() {
+    return "\nBOAT:" + getName() + ":" + getBoatType() + ":" + getLength() + ":" + getDepth();
    
   }
 }

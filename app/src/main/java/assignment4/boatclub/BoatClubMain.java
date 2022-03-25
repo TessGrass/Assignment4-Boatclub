@@ -17,7 +17,8 @@ public class BoatClubMain {
      * @param args - Potential argument.
      */
   public static void main(String[] args) {
-    BoatClubMain boatClub = new BoatClubMain(); 
+    BoatClubMain boatClub = new BoatClubMain();
+    boatClub.init(); 
     boatClub.inputFromMenu();  
   }  
     
@@ -25,17 +26,25 @@ public class BoatClubMain {
    * Start menu.
    */
   public void inputFromMenu() {
-    console.consoleUi();
-    int input = scan.nextInt();
-    scan.nextLine();
-    if (input == 1) {
-      addMember();
-    } else if (input == 2) {
-      listMembers();
-    } else if (input == 3) {
-      exitProgram();
-    } else {
-      console.errorWrongInputStartMenu();
+    
+    try {
+
+      console.consoleUi();
+      String input = scan.nextLine();
+      if (input.equals("1")) {
+        addMember();
+      } else if (input.equals("2")) {
+        listMembers();
+      } else if (input.equals("3")) {
+        register.writeToFile();
+        exitProgram();
+      } else {
+        console.errorWrongInputStartMenu();
+        inputFromMenu();
+      }
+    } catch (Exception e) {
+      System.out.print("1");
+      console.errorMessage();
       inputFromMenu();
     }
   }
@@ -45,11 +54,14 @@ public class BoatClubMain {
    */
   public void addMember() {
     try {
-      Boolean bool = true;
       console.askForMemberName();
       String name = scan.nextLine();
+      if (name.length() < 1) {
+        addMember();
+      }
       console.askForMemberEmail();
       String email = scan.nextLine();
+      Boolean bool = true;
       while (bool) {
         bool = register.addMember(name, email);
         if (bool) {
@@ -85,19 +97,21 @@ public class BoatClubMain {
       console.enterMemberId();
       String id = scan.nextLine();
       if (input.equalsIgnoreCase("A")) {
-        System.out.println(register.listSpecificMember(id));
-        console.askForInputInMemberMenu();
-        input = scan.nextLine();
-        if (input.equalsIgnoreCase("A")) {
+        listMembersAllBoats(id);
+        // System.out.println(register.listSpecificMember(id));
+        //console.askForInputInMemberMenu();
+        // input = scan.nextLine();
+        /* if (input.equalsIgnoreCase("A")) {
           listMembersAllBoats(id);
         } else {
           inputFromMenu();
-        }
+        } */
       } else if (input.equalsIgnoreCase("B")) {
         addBoatToMember(id);
       } else if (input.equalsIgnoreCase("C")) {
         register.deleteMember(id);
         console.deleteMember();
+        inputFromMenu();
       } else if (input.equalsIgnoreCase("D")) {
         inputFromMenu();
       }
@@ -115,12 +129,14 @@ public class BoatClubMain {
    */
   public void addBoatToMember(String id) {
     try {
+      
       int boatPower = 0;
       int boatDepth = 0;
       console.askForBoatType();
       console.askForBoatTypeInput();
       String boatType = null;
-      boatType = scan.nextLine(); 
+      boatType = scan.nextLine();
+      validateInput(boatType);
       console.askForBoatName();
       String boatName = null;
       boatName = scan.nextLine();
@@ -148,7 +164,7 @@ public class BoatClubMain {
       Boat memberBoat = boatFactory.makeBoat(boatType, boatName, boatLength, boatPower, boatDepth);
       register.addBoat(memberBoat, id);
       console.boatAddedToMember();
-      inputFromMenu();
+      scan.nextLine();
     } catch (Exception e) {
       console.errorMessage();
       inputFromMenu();
@@ -169,7 +185,11 @@ public class BoatClubMain {
       }
       console.askForInputFromBoatMenu();
       String input = scan.nextLine();
-      deleteBoat(input, id);
+      if (input.equalsIgnoreCase("a")) {
+        console.askForBoatNameDelete();
+        String name = scan.nextLine();
+        deleteBoat(name, id);
+      }
     } catch (Exception e) {
       console.errorMessage();
       inputFromMenu();
@@ -188,10 +208,10 @@ public class BoatClubMain {
     while (bool) {
       if (input.equals("a") || input.equals("b") || input.equals("c") || input.equals("d")) {
         return input;
+      } else {
+        console.errorMessage();
+        inputFromMenu();
       }
-      console.wrongInput();
-      console.askForInputInListMenu();
-      input = scan.nextLine();
     }
     return input;
   }
@@ -208,10 +228,11 @@ public class BoatClubMain {
     while (bool) {
       if (boatPower > 0 && boatPower < 11000) {
         bool = false;
+      } else {
+        console.wrongInput();
+        console.askForHorsePower();
+        boatPower = scan.nextInt();
       }
-      console.wrongInput();
-      console.askForHorsePower();
-      boatPower = scan.nextInt();
     }
     return boatPower;
   }
@@ -249,10 +270,11 @@ public class BoatClubMain {
     while (bool) {
       if (boatLength > 0 && boatLength < 80) {
         bool = false;
+      } else {
+        console.wrongInput();
+        console.askForBoatLength();
+        boatLength = scan.nextInt();
       }
-      console.wrongInput();
-      console.askForBoatLength();
-      boatLength = scan.nextInt();
     }
     return boatLength;
   }
@@ -266,6 +288,10 @@ public class BoatClubMain {
   public void deleteBoat(String boat, String id) {
     System.out.println("---deletemethod main----");
     register.deleteMemberBoat(boat, id);
+  }
+
+  public void init() {
+    register.readFromFile();
   }
 
   public void exitProgram() {

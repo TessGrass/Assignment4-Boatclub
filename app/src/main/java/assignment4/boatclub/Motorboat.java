@@ -35,7 +35,7 @@ public class Motorboat extends Boat {
   }
 
   @Override
-  public String fileToString() {
-    return "\nBOAT: " + getName() + ":" + getBoatType() + ":" + getLength() + ":" + getHorsepower();
+  public String detailsToString() {
+    return "\nBOAT:" + getName() + ":" + getBoatType() + ":" + getLength() + ":" + getHorsepower();
   }
 }
