@@ -1,0 +1,9 @@
+
+MEMBER:Therese:dsgf:b864Ja
+BOAT:Titianic:Canoe:44
+BOAT:Kotte:Canoe:5
+MEMBER:Fredrik den Store:dfgh:JMhQrp
+BOAT:Kanon:Canoe:75
+MEMBER:Lina:fgh:pyD64r
+BOAT:jojo:Canoe:44
+BOAT:weeee:Canoe:2
